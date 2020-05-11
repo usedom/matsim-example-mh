@@ -7,11 +7,11 @@ import org.matsim.core.events.MatsimEventsReader;
 public class RunEventsHandler {
     public static void main(String[] args) {
 
-        String inputFile = "output/output_events.xml.gz";
+        String inputFile = "output100/output_events.xml.gz";
 
         EventsManager eventsManager = EventsUtils.createEventsManager();
 
-        SimpleEventHandler eventHandler = new SimpleEventHandler();
+        SimpleLinkHandler eventHandler = new SimpleLinkHandler();
         eventsManager.addHandler(eventHandler);
 
         MatsimEventsReader eventsReader = new MatsimEventsReader(eventsManager);
