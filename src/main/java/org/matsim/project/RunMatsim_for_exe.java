@@ -21,12 +21,10 @@ package org.matsim.project;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
 import org.matsim.api.core.v01.TransportMode;
-import org.matsim.api.core.v01.network.Link;
 import org.matsim.api.core.v01.population.*;
 import org.matsim.core.config.Config;
 import org.matsim.core.config.ConfigUtils;
 import org.matsim.core.controler.Controler;
-import org.matsim.core.controler.OutputDirectoryHierarchy;
 import org.matsim.core.scenario.ScenarioUtils;
 
 import java.util.ArrayList;
@@ -40,19 +38,16 @@ public class RunMatsim_for_exe {
 
 	public static void main(String[] args) {
 
-		Config config;
-		if (args == null || args.length == 0 || args[0] == null) {
-			config = ConfigUtils.loadConfig("scenarios/equil/config.xml");
-		} else {
-			config = ConfigUtils.loadConfig(args);
-		}
-		config.controler().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.deleteDirectoryIfExists);
+		Config config = ConfigUtils.loadConfig(args ) ;
 
 		// possibly modify config here
 
 		// ---
 
-		Scenario scenario = ScenarioUtils.loadScenario(config);
+		Scenario scenario = ScenarioUtils.loadScenario(config) ;
+
+		// possibly modify scenario here
+		// We remove all agents from the scenario except one agent
 		Id<Person> interestingPersonId = Id.createPersonId(1);
 		List<Id<Person>> personsToRemove = new ArrayList<>();
 
@@ -97,14 +92,13 @@ public class RunMatsim_for_exe {
 		scenario.getPopulation().addPerson(person2);
 
 		System.out.println("Population size = " + scenario.getPopulation().getPersons().size());
-
-		// possibly modify scenario here
-
 		// ---
 
 		Controler controler = new Controler( scenario ) ;
 
-		//controler.addOverridingModule( new OTFVisLiveModule() ) ;
+		// possibly modify controler here
+
+//		controler.addOverridingModule( new OTFVisLiveModule() ) ;
 
 		// ---
 
