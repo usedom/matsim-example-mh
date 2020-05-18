@@ -16,5 +16,6 @@ public class RunEventsHandler {
 
         MatsimEventsReader eventsReader = new MatsimEventsReader(eventsManager);
         eventsReader.readFile(inputFile);
+        eventHandler.print();
     }
 }
